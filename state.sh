@@ -1,7 +1,25 @@
 #!/bin/bash
 
 function printToScreen {
+	if [[ $(($numberOfBackups-${BASH_REMATCH[4]})) -gt 0 ]]; then
+		sign="+"
+	else
+		sign=""
+	fi
 
+	echo -n " " $volume
+
+	for ((i = ${#volume}; i < 6; ++i)); do
+		echo -n " "
+	done
+
+	echo -n :
+
+	for ((i = ${#numberOfBackups}; i < 4; ++i)); do
+		echo -n " "
+	done
+
+	echo $numberOfBackups backups \($sign$(($numberOfBackups-${BASH_REMATCH[4]}))\)
 }
 
 
