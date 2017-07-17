@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function printToScreen {
-
+	echo ""
 }
 
 
