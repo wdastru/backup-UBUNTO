@@ -1,7 +1,25 @@
 #!/bin/bash
 
 function printToScreen {
-	# echo ""
+	if [[ $(($1-$2)) -gt 0 ]]; then
+		sign="+"
+	else
+		sign=""
+	fi
+
+	echo -n " " $3
+
+	for ((i = ${#3}; i < 6; ++i)); do
+		echo -n " "
+	done
+
+	echo -n :
+
+	for ((i = ${#1}; i < 4; ++i)); do
+		echo -n " "
+	done
+
+	echo $1 backups \($sign$(($1-$2))\)
 }
 
 
@@ -32,25 +50,8 @@ if [[ "$save" != "save" ]]; then
 
 			if [[ ${BASH_REMATCH[3]} = $volume ]]; then
 
-				if [[ $(($numberOfBackups-${BASH_REMATCH[4]})) -gt 0 ]]; then
-					sign="+"
-				else
-					sign=""
-				fi
+				printToScreen($numberOfBackups, ${BASH_REMATCH[4]}, $volume)
 
-				echo -n " " $volume
-
-				for ((i = ${#volume}; i < 6; ++i)); do
-					echo -n " "
-				done
-
-				echo -n :
-
-				for ((i = ${#numberOfBackups}; i < 4; ++i)); do
-					echo -n " "
-				done
-
-				echo $numberOfBackups backups \($sign$(($numberOfBackups-${BASH_REMATCH[4]}))\)
 			fi
 		done
 	done
@@ -64,26 +65,8 @@ else
 
 			if [[ ${BASH_REMATCH[3]} = $volume ]]; then
 
-				if [[ $(($numberOfBackups-${BASH_REMATCH[4]})) -gt 0 ]]; then
-					sign="+"
-				else
-					sign=""
-				fi
-
-				echo -n " " $volume
-
-				for ((i = ${#volume}; i < 6; ++i)); do
-					echo -n " "
-				done
-
-				echo -n :
-
-				for ((i = ${#numberOfBackups}; i < 4; ++i)); do
-					echo -n " "
-				done
-
-				echo $numberOfBackups backups \($sign$(($numberOfBackups-${BASH_REMATCH[4]}))\)
-
+				printToScreen($numberOfBackups, ${BASH_REMATCH[4]}, $volume)
+				
 				# write to log file
 				echo $(date -d -1days +%Y.%m.%d) $volume $numberOfBackups >> /home/backupmanager/log/state.log
 			fi
