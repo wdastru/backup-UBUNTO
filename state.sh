@@ -6,7 +6,8 @@ function printToScreen {
 
 
 save=$1
-echo $save
+#echo $save >> /home/backupmanager/log/state.log
+#exit
 
 echo
 echo " **************************"
