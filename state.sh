@@ -50,7 +50,7 @@ if [[ "$save" != "save" ]]; then
 
 			if [[ ${BASH_REMATCH[3]} = $volume ]]; then
 
-				printToScreen($numberOfBackups, ${BASH_REMATCH[4]}, $volume)
+				printToScreen $numberOfBackups ${BASH_REMATCH[4]} $volume
 
 			fi
 		done
@@ -65,8 +65,8 @@ else
 
 			if [[ ${BASH_REMATCH[3]} = $volume ]]; then
 
-				printToScreen($numberOfBackups, ${BASH_REMATCH[4]}, $volume)
-				
+				printToScreen $numberOfBackups ${BASH_REMATCH[4]} $volume
+
 				# write to log file
 				echo $(date -d -1days +%Y.%m.%d) $volume $numberOfBackups >> /home/backupmanager/log/state.log
 			fi

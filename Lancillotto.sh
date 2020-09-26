@@ -1,7 +1,7 @@
 #!/bin/bash
 
 name=Lancillotto
-disk=SRII
+disk=WD2
 IP=130.192.140.95
 share1=data
 share2=home
